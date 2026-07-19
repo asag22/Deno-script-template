@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-import-prefix
 import { add } from "./add.ts";
 
-console.log(`6+7=${add(6, 7)}`);
+console.log(`4+3=${add(4,3)}`);
