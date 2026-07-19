@@ -1,7 +1,10 @@
 {
   "tasks": {
     "run": "deno run main.ts",
-    "bundle": "deno run --allow-env --allow-run --allow-write --allow-read bundle.ts"
+    "bundle": "deno run --allow-env --allow-run --allow-write --allow-read bundle.ts",
+    "bundleRun": "deno task bundle && deno run ./bundle/main.js",
+    "swapEditor": "deno task bundle && mv ./bundle/main.js ~/bin/termux-file-editor",
+    "swapOpener": "deno task bundle && mv ./bundle/main.js ~/bin/termux-url-opener"
   },
   "imports": {
     "esbuild": "npm:esbuild"
