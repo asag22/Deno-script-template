@@ -9,6 +9,6 @@ await esbuild.build({
     format: "esm",
     target: [ `deno${Deno.version.deno}` ],
     banner: { js: "#!/data/data/com.termux/files/usr/bin/env -S deno run -A --ext=js" },
-})
+});
 
 await esbuild.stop();
