@@ -1,7 +1,7 @@
 # Deno-script-template
 Template for making deno scripts for termux
 
-`deno taks bundle` to bundle the main.ts file
+`deno taks bundle` to bundle the main.ts file into /bundle/main.js
 
 `deno task run` to run main.ts
 
