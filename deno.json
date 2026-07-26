@@ -1,7 +1,7 @@
 {
   "tasks": {
     "build": "deno run --allow-env --allow-run --allow-write --allow-read bundle.ts",
-    "install": "deno run -A ./scripts/install.ts"
+    "install": "deno run --allow-env --allow-run --allow-write --allow-read ./scripts/install.ts"
   },
   "imports": {
     "@std/cli": "jsr:@std/cli",
