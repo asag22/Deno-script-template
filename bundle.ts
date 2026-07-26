@@ -12,6 +12,6 @@ await esbuild.build({
     banner: { js: "#!/data/data/com.termux/files/usr/bin/env -S deno run -A --ext=js" },
 });
 
-console.log(" src/main.ts bundled");
+console.log(`${entryPoint} bundled`);
 
 await esbuild.stop();
