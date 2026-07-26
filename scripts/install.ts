@@ -1,27 +1,48 @@
 import { parseArgs } from "@std/cli";
-import { resolve, join } from "@std/path";
+import { join, resolve } from "@std/path";
 
-const parsedArgs = parseArgs(Deno.args, { boolean: "help", alias: { h: "help" } });
+const scriptPath = "dist/main.js";
+
+const parsedArgs = parseArgs(Deno.args, {
+  boolean: ["help"],
+  alias: { h: "help" },
+});
+
 let [arg] = parsedArgs._;
-if(typeof arg === "number") {arg = arg.toString()};
-
-const homeDir = Deno.env.get("HOME");
-if(!homeDir){
-    console.log("no HOME enviroment varible");
-    Deno.exit();
+if (typeof arg === "number") {
+  arg = arg.toString();
 }
+
+const homeDir = Deno.env.get("HOME") || Deno.env.get("USERPROFILE");
+if (!homeDir) {
+  console.error("Error: HOME environment variable is not set.");
+  Deno.exit(1);
+}
+
 const installDir = join(homeDir, "bin");
+const validTypes = ["fe", "file-editor", "uo", "url-opener"];
 
-console.log(installDir);
-
-// console.log(parsedArgs);
-
-const type = [ "fe", "file-editor", "uo", "url-opener" ];
-if(!arg || !type.includes(arg) || parsedArgs.help){
-    console.log("usage: ");
+if (!arg || !validTypes.includes(String(arg)) || parsedArgs.help) {
+  console.log("Usage: deno run main.ts [fe|file-editor|uo|url-opener]");
+  Deno.exit(parsedArgs.help ? 0 : 1);
 }
 
-// const _buildResult = await new Deno.Command("deno", {args: ["task", "build" ]}).spawn();
-// Deno.chmodSync("dist/main.js", 0o700);
-// Deno.copyFileSync();
+let scriptName = "termux-file-editor";
+if (["uo", "url-opener"].includes(String(arg))) {
+  scriptName = "termux-url-opener";
+}
 
+const scriptDestination = resolve(installDir, scriptName);
+
+const { success } = await new Deno.Command("deno", { args: ["task", "build"] }).output();
+
+if (!success) {
+  console.error("Build failed.");
+  Deno.exit(1);
+}
+
+Deno.mkdirSync(installDir, { recursive: true });
+Deno.copyFileSync(scriptPath, scriptDestination);
+Deno.chmodSync(scriptDestination, 0o700);
+
+console.log(`Successfully installed to ${scriptDestination}`);
