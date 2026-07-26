@@ -1,11 +1,11 @@
 # Deno-script-template
 Template for making deno scripts for termux
 
-`deno taks bundle` to bundle the main.ts file into /bundle/main.js
+`deno taks build` to bundle the main.ts file into dist/main.js
 
-`deno task run` to run main.ts
+`deno task install [fe|file-editor|uo|url-opener]` to install
 
-`deno task swapEditor` to place bundled main.js in place of termux-file-editor
+`fe` or `file-editor` to put the built script into ~/bin as termux-file-editor
 
-`deno task swapOpener` to place bundled main.js in place of termux-url-oepener
+`uo` or `url-opener` to put the built script into ~/bin as termux-url-opener
 
