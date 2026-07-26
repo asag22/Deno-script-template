@@ -13,7 +13,7 @@ if (typeof arg === "number") {
   arg = arg.toString();
 }
 
-const homeDir = Deno.env.get("HOME") || Deno.env.get("USERPROFILE");
+const homeDir = Deno.env.get("HOME") || Deno.env.get("USERPROFILE"); // userprofile is here becouse it makes it easier to test on windows
 if (!homeDir) {
   console.error("Error: HOME environment variable is not set.");
   Deno.exit(1);
