@@ -1,5 +1,6 @@
 import { parseArgs } from "@std/cli";
 import { join, resolve } from "@std/path";
+import { existsSync } from "@std/fs";
 
 const scriptPath = "dist/main.js";
 
@@ -39,6 +40,13 @@ const { success } = await new Deno.Command("deno", { args: ["task", "build"] }).
 if (!success) {
   console.error("Build failed.");
   Deno.exit(1);
+}
+
+if(existsSync(scriptDestination, {isFile: true})){
+  const oldScriptsDir = join(installDir, "old-scripts")
+  
+  Deno.mkdirSync(oldScriptsDir, { recursive: true });
+  Deno.copyFileSync(scriptDestination, join(oldScriptsDir, `${scriptName}-${new Date().valueOf()}`));
 }
 
 Deno.mkdirSync(installDir, { recursive: true });
