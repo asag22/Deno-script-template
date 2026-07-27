@@ -1,7 +1,8 @@
 {
   "tasks": {
     "build": "deno run --allow-env --allow-run --allow-write --allow-read bundle.ts",
-    "install": "deno run --allow-env --allow-run --allow-write --allow-read ./scripts/install.ts"
+    "install": "deno run --allow-env --allow-run --allow-write --allow-read ./scripts/install.ts",
+    "clear-old-scripts": "rm ~/bin/old-scripts/termux-file-editor-* ~/bin/old-scripts/termux-url-opener-*"
   },
   "imports": {
     "@std/cli": "jsr:@std/cli",
