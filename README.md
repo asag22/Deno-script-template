@@ -3,7 +3,7 @@ Template for making deno scripts for termux
 
 `deno taks build` to bundle the main.ts file into dist/main.js
 
-`deno task install [fe|file-editor|uo|url-opener]` to install. WARNING!!! install overrides previous script
+`deno task install [fe|file-editor|uo|url-opener]` to install, old scripts will be put into `~/bin/old-scripts/`
 
 `fe` or `file-editor` to put the built script into ~/bin as termux-file-editor
 
