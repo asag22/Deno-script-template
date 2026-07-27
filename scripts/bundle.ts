@@ -1,14 +1,17 @@
 import * as esbuild from "esbuild";
 
+const entryPoint = Deno.args[0] || "src/main.ts";
+
 await esbuild.build({
-    entryPoints: [ "main.ts" ],
+    entryPoints: [ entryPoint ],
     bundle: true,
-    minify: true,
     packages: "external",
-    outdir: "bundle",
+    outdir: "dist",
     format: "esm",
     target: [ `deno${Deno.version.deno}` ],
     banner: { js: "#!/data/data/com.termux/files/usr/bin/env -S deno run -A --ext=js" },
 });
+
+console.log(`${entryPoint} bundled`);
 
 await esbuild.stop();

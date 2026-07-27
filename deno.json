@@ -1,12 +1,13 @@
 {
   "tasks": {
-    "run": "deno run main.ts",
-    "bundle": "deno run --allow-env --allow-run --allow-write --allow-read bundle.ts",
-    "bundleRun": "deno task bundle && deno run ./bundle/main.js",
-    "swapEditor": "deno task bundle && mv ./bundle/main.js ~/bin/termux-file-editor",
-    "swapOpener": "deno task bundle && mv ./bundle/main.js ~/bin/termux-url-opener"
+    "build": "deno run --allow-env --allow-run --allow-write --allow-read ./scripts/bundle.ts",
+    "install": "deno run --allow-env --allow-run --allow-write --allow-read ./scripts/install.ts",
+    "clear-old-scripts": "rm ~/bin/old-scripts/termux-file-editor-* ~/bin/old-scripts/termux-url-opener-*"
   },
   "imports": {
+    "@std/cli": "jsr:@std/cli",
+    "@std/fs": "jsr:@std/fs@^1.0.24",
+    "@std/path": "jsr:@std/path@^1.1.6",
     "esbuild": "npm:esbuild"
   }
 }
